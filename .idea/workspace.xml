@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bfff7374-b073-438d-a2bd-243eda53d2f0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/guess-number-game.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0053748938497398" />
+      <entry key="MS500" value="1.4260735109350346" />
+      <entry key="S2" value="2.882189505754927" />
+      <entry key="S5" value="4.486077999539013" />
+      <entry key="S10" value="5.508208651639869" />
+      <entry key="S30" value="6.62469030277594" />
+      <entry key="S60" value="7.934531888725416" />
+      <entry key="M2" value="10.011824039105528" />
+      <entry key="M5" value="12.981583510372424" />
+      <entry key="M10" value="15.071173183067907" />
+      <entry key="M15" value="16.089596305416567" />
+      <entry key="M30" value="17.36744957578377" />
+      <entry key="H1" value="18.1321000774594" />
+      <entry key="H2" value="18.552092981880744" />
+      <entry key="H4" value="18.772415958035488" />
+      <entry key="D1" value="18.96155260316352" />
+      <entry key="W1" value="18.99449469409856" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9644559358704591" />
+      <entry key="MS500" value="1.4149433494891832" />
+      <entry key="S2" value="2.8769909837906007" />
+      <entry key="S5" value="4.482878508617341" />
+      <entry key="S10" value="5.506244959914113" />
+      <entry key="S30" value="6.622955170531102" />
+      <entry key="S60" value="7.9308058355403555" />
+      <entry key="M2" value="10.007212201129915" />
+      <entry key="M5" value="12.978076233300744" />
+      <entry key="M10" value="15.068848128356437" />
+      <entry key="M15" value="16.08786627632794" />
+      <entry key="M30" value="17.366474071692064" />
+      <entry key="H1" value="18.131579844598598" />
+      <entry key="H2" value="18.551824028170522" />
+      <entry key="H4" value="18.772279174299257" />
+      <entry key="D1" value="18.961529476795594" />
+      <entry key="W1" value="18.994491382156692" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3FOVxMgV2GPqqFuaBBFNouj2fyR" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\CynicznyKot\PyCharmProjects\guess-number-game\src" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-c59985aa861c-c2ffad84badb-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.24374.152" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bfff7374-b073-438d-a2bd-243eda53d2f0" name="Changes" comment="" />
+      <created>1781946348057</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1781946348057</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

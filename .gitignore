@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+
+# Виртуальное окружение
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# Переменные окружения (секреты)
+.env
+.env.local
+.env.*.local
+
+# Файлы отчётов
+coverage/
+htmlcov/
+.pytest_cache/
+.tox/
+.mypy_cache/
+
+# OS
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+# Логи
+*.log
+logs/
+
+# Базы данных
+*.db
+*.sqlite
+
+# Временные файлы
+*.tmp
+*.temp
