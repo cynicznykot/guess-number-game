@@ -9,10 +9,26 @@ def main():
     print("🎯 Welcome to the game 'Guess the number'!")
     print("=" * 50)
 
-    # Setting the range
-    start_user_num = int(input("Please enter any number for start step: "))
-    end_user_num = int(input("Please enter any number for end step: "))
+    # Setting the range with error handling
+    while True:
+        try:
+            start_user_num = int(input("Please enter any number for start step: "))
+            break
+        except ValueError:
+            print("❌ Error! Please enter a NUMBER for start step!")
 
+    while True:
+        try:
+            end_user_num = int(input("Please enter any number for end step: "))
+            break
+        except ValueError:
+            print("❌ Error! Please enter a NUMBER for end step!")
+
+    if start_user_num >= end_user_num:
+        print("❌ Error! The start number is higher than the end number!")
+        return
+
+    # Guess the number
     secret_num = random.randint(start_user_num, end_user_num)
     print(f"🔢 I guessed the number from {start_user_num} to {end_user_num}!")
 

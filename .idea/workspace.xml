@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bfff7374-b073-438d-a2bd-243eda53d2f0" name="Changes" comment="Initial project setup">
+    <list default="true" id="bfff7374-b073-438d-a2bd-243eda53d2f0" name="Changes" comment="def main()">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
@@ -23,75 +23,75 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "cynicznykot"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;cynicznykot&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/cynicznykot/guess-number-game.git",
-    "accountId": "bc84021c-9452-4647-8c7b-7d8e729e00fe"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/cynicznykot/guess-number-game.git&quot;,
+    &quot;accountId&quot;: &quot;bc84021c-9452-4647-8c7b-7d8e729e00fe&quot;
   }
-}]]></component>
+}</component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0053732102271085" />
-      <entry key="MS500" value="1.3516031794419407" />
-      <entry key="S2" value="1.8591063103822085" />
-      <entry key="S5" value="2.661810932829706" />
-      <entry key="S10" value="3.871247559469486" />
-      <entry key="S30" value="7.924366383652542" />
-      <entry key="S60" value="13.289150942920648" />
-      <entry key="M2" value="21.97911774027169" />
-      <entry key="M5" value="46.03162472346366" />
-      <entry key="M10" value="80.13926410048903" />
-      <entry key="M15" value="103.24895639691087" />
-      <entry key="M30" value="139.13625032306354" />
-      <entry key="H1" value="164.72999182173197" />
-      <entry key="H2" value="180.24038655248762" />
-      <entry key="H4" value="188.81462757337655" />
-      <entry key="D1" value="196.4243840304352" />
-      <entry key="W1" value="197.7737855280672" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000000000367537" />
+      <entry key="S2" value="1.004127156209797" />
+      <entry key="S5" value="1.1685631493339146" />
+      <entry key="S10" value="1.5818208477179403" />
+      <entry key="S30" value="2.788431387140349" />
+      <entry key="S60" value="5.747057723124407" />
+      <entry key="M2" value="13.775457265421725" />
+      <entry key="M5" value="39.14891259355153" />
+      <entry key="M10" value="78.01681809683032" />
+      <entry key="M15" value="108.06129622106116" />
+      <entry key="M30" value="160.41193399530943" />
+      <entry key="H1" value="201.505447631332" />
+      <entry key="H2" value="227.76845658747192" />
+      <entry key="H4" value="242.69722765256793" />
+      <entry key="D1" value="256.18119850023413" />
+      <entry key="W1" value="258.5947376310935" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="4.9E-324" />
-      <entry key="MS500" value="1.944401520860881E-65" />
-      <entry key="S2" value="6.640434358837872E-17" />
-      <entry key="S5" value="3.3797034512638455E-7" />
-      <entry key="S10" value="5.813521696238734E-4" />
-      <entry key="S30" value="0.0834602662557346" />
-      <entry key="S60" value="0.28889494081925005" />
-      <entry key="M2" value="0.5376781533111521" />
-      <entry key="M5" value="0.8124787064273188" />
-      <entry key="M10" value="1.06318268598296" />
-      <entry key="M15" value="1.2392953986247308" />
-      <entry key="M30" value="1.524026882306159" />
-      <entry key="H1" value="1.7308977058605075" />
-      <entry key="H2" value="1.8565276427848725" />
-      <entry key="H4" value="1.925872256575397" />
-      <entry key="D1" value="1.9872985686916165" />
-      <entry key="W1" value="1.9981768187773272" />
+      <entry key="MS100" value="2.5638872857902254E-51" />
+      <entry key="MS500" value="7.61692686620524E-11" />
+      <entry key="S2" value="0.0029542343696952384" />
+      <entry key="S5" value="0.09731459478016292" />
+      <entry key="S10" value="0.3119528795047612" />
+      <entry key="S30" value="0.6801039641574388" />
+      <entry key="S60" value="0.8671858393067651" />
+      <entry key="M2" value="1.1266897385224783" />
+      <entry key="M5" value="1.6647443894264577" />
+      <entry key="M10" value="2.195953583678097" />
+      <entry key="M15" value="2.532203488659001" />
+      <entry key="M30" value="3.0669254746108963" />
+      <entry key="H1" value="3.4641320484422464" />
+      <entry key="H2" value="3.711358767413115" />
+      <entry key="H4" value="3.850003023533967" />
+      <entry key="D1" value="3.9741654978501417" />
+      <entry key="W1" value="3.9962882689765005" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.957686251288615" />
-      <entry key="MS500" value="1.3375849583664272" />
-      <entry key="S2" value="1.8431400245781955" />
-      <entry key="S5" value="2.620476154695772" />
-      <entry key="S10" value="3.828632626452206" />
-      <entry key="S30" value="7.959046268929041" />
-      <entry key="S60" value="13.5163627975198" />
-      <entry key="M2" value="22.452457182306766" />
-      <entry key="M5" value="46.786650303781975" />
-      <entry key="M10" value="81.15508232443813" />
-      <entry key="M15" value="104.44907106611143" />
-      <entry key="M30" value="140.6352043127622" />
-      <entry key="H1" value="166.4465173677728" />
-      <entry key="H2" value="182.08919141234838" />
-      <entry key="H4" value="190.73649289238017" />
-      <entry key="D1" value="198.4109935058865" />
-      <entry key="W1" value="199.77186336961864" />
+      <entry key="MS100" value="0.01498850186445725" />
+      <entry key="MS500" value="0.4316697793526528" />
+      <entry key="S2" value="0.8167575147160855" />
+      <entry key="S5" value="1.1714100530289975" />
+      <entry key="S10" value="1.8289528874677947" />
+      <entry key="S30" value="3.430147393260482" />
+      <entry key="S60" value="6.574158302088332" />
+      <entry key="M2" value="14.854778786475592" />
+      <entry key="M5" value="40.76193078822885" />
+      <entry key="M10" value="80.1637491926587" />
+      <entry key="M15" value="110.54975544741514" />
+      <entry key="M30" value="163.4479746183453" />
+      <entry key="H1" value="204.95080405680383" />
+      <entry key="H2" value="231.46939898558063" />
+      <entry key="H4" value="246.54173564265045" />
+      <entry key="D1" value="260.1544054990477" />
+      <entry key="W1" value="262.5908878879076" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -103,23 +103,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\CynicznyKot\PyCharmProjects\guess-number-game\src" />
@@ -148,7 +148,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781947497527</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="def main()">
+      <option name="closed" value="true" />
+      <created>1781949835539</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1781949835539</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,6 +164,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial project setup" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial project setup" />
+    <MESSAGE value="def main()" />
+    <option name="LAST_COMMIT_MESSAGE" value="def main()" />
   </component>
 </project>
