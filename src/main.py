@@ -37,24 +37,27 @@ def main():
 
     # Input validation
     while True:
-        user_guess = int(input("Please enter your guess: "))
-
-        attempts += 1
-
-        if user_guess == random_num:
-            print(f"🎉 CONGRATULATION! You guessed the number {random_num}!")
-            print(f"📊 Your attempts: {attempts}!")
+        try:
+            user_guess = int(input("Please enter your guess: "))
             break
+        except ValueError:
+            print("❌ Error! Please enter a NUMBER!")
 
-        elif user_guess < random_num:
-            print(f"📈 The number is HIGHER! Try again!")
-        else:
-            print(f"📉 The number is LOWER! Try again!")
+    attempts += 1
+
+    if user_guess == random_num:
+        print(f"🎉 CONGRATULATION! You guessed the number {random_num}!")
+        print(f"📊 Your attempts: {attempts}!")
+
+    elif user_guess < random_num:
+        print(f"📈 The number is HIGHER! Try again!")
+    else:
+        print(f"📉 The number is LOWER! Try again!")
 
 if __name__ == "__main__":
     main()
 
-# Repeating the game
+# Main game loop
 while True:
     play_again = input("Do you want to play again? (y/n): ").lower()
     if play_again in ['yes', 'y', 'да', 'д']:
