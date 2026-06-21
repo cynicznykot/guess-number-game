@@ -2,8 +2,7 @@ import random
 
 
 def main():
-    """ Main function game """
-
+    """Main game function"""
     # Greeting
     print("=" * 50)
     print("🎯 Welcome to the game 'Guess the number'!")
@@ -24,11 +23,15 @@ def main():
         except ValueError:
             print("❌ Error! Please enter a NUMBER for end step!")
 
+    if start_user_step == 6 and end_user_step == 7:
+        print(f"😄 Are you seriously?")
+        return
+
     if start_user_step >= end_user_step:
         print("❌ Error! The start number is higher than the end number!")
         return
 
-    # Guess the number
+    # Add random the number
     random_num = random.randint(start_user_step, end_user_step)
     print(f"🔢 I guessed the number from {start_user_step} to {end_user_step}!")
 
@@ -37,22 +40,29 @@ def main():
 
     # Input validation
     while True:
-        try:
-            user_guess = int(input("Please enter your guess: "))
+        while True:
+            try:
+                user_guess = int(input("Please enter your guess: "))
+                break
+            except ValueError:
+                print("❌ Error! Please enter a NUMBER!")
+
+        if user_guess < start_user_step or user_guess > end_user_step:
+            print(f"✖ The number must be from {start_user_step} to {end_user_step}!")
+            continue
+
+        attempts += 1
+
+        if user_guess == random_num:
+            print(f"🎉 CONGRATULATION! You guessed the number {random_num}!")
+            print(f"📊 Your attempts: {attempts}!")
             break
-        except ValueError:
-            print("❌ Error! Please enter a NUMBER!")
 
-    attempts += 1
+        elif user_guess < random_num:
+            print(f"📈 The number is HIGHER! Try again!")
+        else:
+            print(f"📉 The number is LOWER! Try again!")
 
-    if user_guess == random_num:
-        print(f"🎉 CONGRATULATION! You guessed the number {random_num}!")
-        print(f"📊 Your attempts: {attempts}!")
-
-    elif user_guess < random_num:
-        print(f"📈 The number is HIGHER! Try again!")
-    else:
-        print(f"📉 The number is LOWER! Try again!")
 
 if __name__ == "__main__":
     main()
@@ -61,9 +71,7 @@ if __name__ == "__main__":
 while True:
     play_again = input("Do you want to play again? (y/n): ").lower()
     if play_again in ['yes', 'y', 'да', 'д']:
-            main()
+        main()
     else:
         print("👋 Thank you for playing! Goodbye!")
         break
-
-
