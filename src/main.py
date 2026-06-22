@@ -1,77 +1,89 @@
 import random
 
 
-def main():
-    """Main game function"""
-    # Greeting
+# --- 1. Auxiliary Functions ---
+
+
+def greet():
     print("=" * 50)
     print("🎯 Welcome to the game 'Guess the number'!")
     print("=" * 50)
 
-    # Setting the range with error handling
+
+def get_number(propt):
     while True:
         try:
-            start_user_step = int(input("Please enter any number for start step: "))
-            break
+            return int(input(propt))
         except ValueError:
-            print("❌ Error! Please enter a NUMBER for start step!")
+            print("❌ Error! Please enter a NUMBER!")
 
+
+def get_range():
     while True:
-        try:
-            end_user_step = int(input("Please enter any number for end step: "))
-            break
-        except ValueError:
-            print("❌ Error! Please enter a NUMBER for end step!")
+        start_user_step = get_number("🔢 Please enter any number for start step: ")
+        end_user_step = get_number("🔢 Please enter any number for end step: ")
+        if start_user_step == 6 and end_user_step == 7:
+            print("😄 Six-seven.. Are you kidding? Please let's be serious!")
+            continue
+        if start_user_step < end_user_step:
+            secret_number = random.randint(start_user_step, end_user_step)
+            return start_user_step, end_user_step, secret_number
+        print("Start must be less than end!")
 
-    if start_user_step == 6 and end_user_step == 7:
-        print(f"😄 Are you seriously?")
-        return
 
-    if start_user_step >= end_user_step:
-        print("❌ Error! The start number is higher than the end number!")
-        return
+def check_guess(user_guess, secret_number, start_user_step, end_user_step):
+    if user_guess < start_user_step or user_guess > end_user_step:
+        return False, f"Number must be from {start_user_step} to {end_user_step}"
+    if user_guess == secret_number:
+        return True, f"🎉🏆⭐ CONGRATULATION! You guessed the number {secret_number}!"
+    elif user_guess < secret_number:
+        return False, f"📈 The number is HIGHER! Try again!"
+    else:
+        return False, f"📉 The number is LOWER! Try again!"
 
-    # Add random the number
-    random_num = random.randint(start_user_step, end_user_step)
-    print(f"🔢 I guessed the number from {start_user_step} to {end_user_step}!")
 
-    # Number of attempts
+# --- 2. Game logic ---
+
+
+def play_game():
+    start_user_step, end_user_step, secret_number = get_range()
     attempts = 0
 
-    # Input validation
-    while True:
-        while True:
-            try:
-                user_guess = int(input("Please enter your guess: "))
-                break
-            except ValueError:
-                print("❌ Error! Please enter a NUMBER!")
+    print(f"❓ I guessed from {start_user_step} to {end_user_step}!")
 
-        if user_guess < start_user_step or user_guess > end_user_step:
-            print(f"✖ The number must be from {start_user_step} to {end_user_step}!")
+    while True:
+        user_guess = get_number("💭 Your guess: ")
+        is_correct, message = check_guess(user_guess, secret_number, start_user_step, end_user_step)
+
+        if message == f"Number must be from {start_user_step} to {end_user_step}!":
+            print(message)
             continue
 
         attempts += 1
+        print(message)
 
-        if user_guess == random_num:
-            print(f"🎉 CONGRATULATION! You guessed the number {random_num}!")
-            print(f"📊 Your attempts: {attempts}!")
+        if is_correct:
+            print(f"🔍 Your Attempts: {attempts}")
             break
 
-        elif user_guess < random_num:
-            print(f"📈 The number is HIGHER! Try again!")
-        else:
-            print(f"📉 The number is LOWER! Try again!")
 
+def play_again():
+    answer = input("🎮 Do you want to play again? (y/n): ").lower()
+    return answer in ['yes', 'y', 'да', 'д']
+
+
+# --- 3. Main func ---
+
+def main():
+    greet()
+    while True:
+        play_game()
+        if not play_again():
+            print(f"Thank you for playing. Goodbye! 👋")
+            break
+
+
+# --- 4. Entry point ---
 
 if __name__ == "__main__":
     main()
-
-# Main game loop
-while True:
-    play_again = input("Do you want to play again? (y/n): ").lower()
-    if play_again in ['yes', 'y', 'да', 'д']:
-        main()
-    else:
-        print("👋 Thank you for playing! Goodbye!")
-        break
