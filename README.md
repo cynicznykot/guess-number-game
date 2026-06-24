@@ -1,14 +1,16 @@
-# 🎯 Угадай число
-
-[![Python Version](https://img.shields.io/badge/python-3.11+-blue.svg)](https://python.org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# Угадай число
 
 Простая игра на Python, где вы угадываете случайное число.
 
+## 🎯 Как играть
+1. Программа загадывает число в выбранном вами диапазоне
+2. Вы вводите свои варианты
+3. Игра даёт подсказки: "Больше", "Меньше", "Горячо/Холодно"
+4. Победа, когда число угадано!
+
 ## 🚀 Быстрый старт
 
-### Установка
-
 ```bash
-git clone https://github.com/ваш-username/guess-number-game.git
+git clone https://github.com/Bau-username/guess-number-game.git
 cd guess-number-game
+python src/main.py
