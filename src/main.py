@@ -56,6 +56,27 @@ def check_guess(user_guess, secret_number, start_user_step, end_user_step):
         return False, f"📉 The number is LOWER! Try again!"
 
 
+def get_temperature(secret_number, user_guess, start_user_step, end_user_step):
+    # 'Hot/Cold' calculation func
+    distance = abs(user_guess - secret_number)
+    max_distance = end_user_step - start_user_step
+
+    percent = (distance / max_distance) * 100
+
+    if percent <= 10:
+        return f"🔥 Very hot! You almost guessed it!"
+    elif percent <= 30:
+        return f"🔥 Hot! You're close!"
+    elif percent <= 60:
+        return f"🌤️ Warm. Keep up the good work!"
+    else:
+        return f"❄️ Cold. You're far away."
+
+
+def compare_with_previous(prev_diff, current_diff):
+    pass
+
+
 # --- 2. GAME LOGIC FUNCTIONS ---
 
 
@@ -70,12 +91,15 @@ def play_game():
         user_guess = get_number("📝 Your guess: ")
         is_correct, message = check_guess(user_guess, secret_number, start_user_step, end_user_step)
 
+        temp = get_temperature(secret_number, user_guess, start_user_step, end_user_step)
+
         if message == f"🤯 Number must be from {start_user_step} to {end_user_step}!":
             print(message)
             continue
 
         attempts += 1
         print(message)
+        print(temp)
 
         if is_correct:
             print(f"📊 Your Attempts: {attempts}")
