@@ -11,6 +11,6 @@
 ## 🚀 Быстрый старт
 
 ```bash
-git clone https://github.com/Bau-username/guess-number-game.git
+git clone https://github.com/cynicznykot/guess-number-game.git
 cd guess-number-game
 python src/main.py
