@@ -63,18 +63,16 @@ def get_temperature(secret_number, user_guess, start_user_step, end_user_step):
 
     percent = (distance / max_distance) * 100
 
-    if percent <= 10:
+    if percent <= 5:
         return f"🔥 Very hot! You almost guessed it!"
+    elif percent <= 15:
+        return f"☀️ Hot! You're close!"
     elif percent <= 30:
-        return f"🔥 Hot! You're close!"
-    elif percent <= 60:
         return f"🌤️ Warm. Keep up the good work!"
+    elif percent <= 60:
+        return "🌥️ Cool. You're getting there."
     else:
         return f"❄️ Cold. You're far away."
-
-
-def compare_with_previous(prev_diff, current_diff):
-    pass
 
 
 # --- 2. GAME LOGIC FUNCTIONS ---
@@ -91,19 +89,20 @@ def play_game():
         user_guess = get_number("📝 Your guess: ")
         is_correct, message = check_guess(user_guess, secret_number, start_user_step, end_user_step)
 
-        temp = get_temperature(secret_number, user_guess, start_user_step, end_user_step)
-
         if message == f"🤯 Number must be from {start_user_step} to {end_user_step}!":
             print(message)
             continue
 
         attempts += 1
-        print(message)
-        print(temp)
 
         if is_correct:
+            print(message)
             print(f"📊 Your Attempts: {attempts}")
             break
+
+        temp = get_temperature(secret_number, user_guess, start_user_step, end_user_step)
+        print(message)
+        print(temp)
 
 
 def play_again():
@@ -124,8 +123,3 @@ def main():
             print(f"Thank you for playing. Goodbye! 👋")
             break
 
-
-# --- 4. ENTRY POINT ---
-
-if __name__ == "__main__":
-    main()
