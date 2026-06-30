@@ -3,7 +3,7 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(__file__)), 'src'))
 
-from main import check_guess, get_temperature
+from main import check_guess, get_temperature, compare_with_previous
 
 # Tests
 def test_correct_guess():
@@ -51,6 +51,11 @@ def test_temperature_cold():
     assert "Cold" in temp
 
 
+def test_compare_with_previous():
+    assert "getting closer" in compare_with_previous(10, 5)
+    assert "moving away" in compare_with_previous(5, 10)
+    assert "same distance" in compare_with_previous(7, 7)
+
 if __name__ == "__main__":
     tests = [
         test_correct_guess,
@@ -62,6 +67,7 @@ if __name__ == "__main__":
         test_temperature_hot,
         test_temperature_warm,
         test_temperature_cold,
+        test_compare_with_previous,
     ]
 
     passed = 0

@@ -49,7 +49,7 @@ def check_guess(user_guess, secret_number, start_user_step, end_user_step):
     if user_guess < start_user_step or user_guess > end_user_step:
         return False, f"🤯 Number must be from {start_user_step} to {end_user_step}"
     if user_guess == secret_number:
-        return True, f"🎉🏆⭐ CONGRATULATION! You guessed the number {secret_number}!"
+        return True, f""
     elif user_guess < secret_number:
         return False, f"📈 The number is HIGHER! Try again!"
     else:
@@ -73,8 +73,14 @@ def get_temperature(secret_number, user_guess, start_user_step, end_user_step):
         return f"❄️ Cold. You're far away."
 
 
-def compare_with_previous(prev_diff, current_diff):
-    pass
+def compare_with_previous(prev_distance, current_distance):
+    # 'Prev/Current' distance calculation func
+    if prev_distance < current_distance:
+        return f"📉 Oops! You're moving away from the goal."
+    elif prev_distance > current_distance:
+        return f"📈 Great! You're getting closer to the goal."
+    else:
+        return f"⏸️ You're the same distance."
 
 
 # --- 2. GAME LOGIC FUNCTIONS ---
@@ -84,6 +90,8 @@ def play_game():
     # Core game func
     start_user_step, end_user_step, secret_number = get_range()
     attempts = 0
+    distance = None
+    dynamic = None
 
     print(f"🤔 I guessed from {start_user_step} to {end_user_step}!")
 
@@ -91,19 +99,30 @@ def play_game():
         user_guess = get_number("📝 Your guess: ")
         is_correct, message = check_guess(user_guess, secret_number, start_user_step, end_user_step)
 
-        temp = get_temperature(secret_number, user_guess, start_user_step, end_user_step)
-
         if message == f"🤯 Number must be from {start_user_step} to {end_user_step}!":
             print(message)
             continue
 
         attempts += 1
+
+        if is_correct:
+            print("\n" +"=" * 50)
+            print(f"🎉🏆⭐ CONGRATULATION! You guessed the number {secret_number}!")
+            print(f"📊 Your Attempts: {attempts}")
+            print("=" * 50)
+            break
+
+        temp = get_temperature(secret_number, user_guess, start_user_step, end_user_step)
+        current_distance = abs(secret_number - user_guess)
+
+        if distance is not None:
+            dynamic = compare_with_previous(distance, current_distance)
+            print(dynamic)
+
         print(message)
         print(temp)
 
-        if is_correct:
-            print(f"📊 Your Attempts: {attempts}")
-            break
+        distance = current_distance
 
 
 def play_again():
