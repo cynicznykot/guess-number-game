@@ -1,13 +1,28 @@
+"""
+Guess the Number Game.
+
+A console-based game where the player guesses a randomly generated number
+within a user-defined range. The game provides hints and temperature feedback.
+"""
+
+
 import random
 import time
 import sys
 
 
-# --- 1. AUXILIARY FUNCTIONS ---
+# ======================================================================================
+# 1. AUXILIARY FUNCTIONS
+# ======================================================================================
 
 
 def greet():
-    # Welcome func with rules and objective
+    """
+    Display welcome message and game rules.
+
+    Shows a formatted welcome screen with emojis and explains the goal
+    of the game. Includes short pauses for better user experience.
+    """
     print("\n" + "=" * 50)
     print("🖐️ Welcome to the game 'Guess the number'!")
     print("=" * 50)
@@ -22,7 +37,12 @@ def greet():
 
 
 def get_number(prompt):
-    # Number validation func
+    """
+    Get a valid integer from the user.
+
+    Continuously prompts the user until a valid integer is entered.
+    Handles ValueError exceptions and displays an error message.
+    """
     while True:
         try:
             return int(input(prompt))
@@ -31,33 +51,54 @@ def get_number(prompt):
 
 
 def get_range():
-    # Range selection func
+    """
+    Get a valid range from the user.
+
+    Prompts for start and end values, validates them and generates
+    a random secret number within the range.
+    """
     while True:
         start_user_step = get_number("🖥️ Please enter any number for start step: ")
+
         end_user_step = get_number("🖥️ Please enter any number for end step: ")
+
+        # Easter meme egg: 6-7 joke
         if start_user_step == 6 and end_user_step == 7:
             print("😄 Six-seven.. Are you kidding? Please let's be serious!")
             continue
         if start_user_step < end_user_step:
             secret_number = random.randint(start_user_step, end_user_step)
             return start_user_step, end_user_step, secret_number
+
         print("❌ Start must be less than end!")
 
 
 def check_guess(user_guess, secret_number, start_user_step, end_user_step):
-    # Response validation func
+    """
+    Validate the user's guess and return a boolean.
+
+    Checks if the guess is within the range, correct, higher of lower.
+    """
+
+    # Check if guess is outside the valid range
     if user_guess < start_user_step or user_guess > end_user_step:
         return False, f"🤯 Number must be from {start_user_step} to {end_user_step}"
+
+    # Check if guess is correct
     if user_guess == secret_number:
         return True, f"🎉🏆⭐ CONGRATULATION! You guessed the number {secret_number}!"
-    elif user_guess < secret_number:
+
+    # Provide direction hint
+    if user_guess < secret_number:
         return False, f"📈 The number is HIGHER! Try again!"
     else:
         return False, f"📉 The number is LOWER! Try again!"
 
 
 def get_temperature(secret_number, user_guess, start_user_step, end_user_step):
-    # 'Hot/Cold' calculation func
+    """
+    Calculate how close the guess is to the secret number.
+    """
     distance = abs(user_guess - secret_number)
     max_distance = end_user_step - start_user_step
 
@@ -75,11 +116,20 @@ def get_temperature(secret_number, user_guess, start_user_step, end_user_step):
         return f"❄️ Cold. You're far away."
 
 
-# --- 2. GAME LOGIC FUNCTIONS ---
+# ===================================================================================
+# 2. GAME LOGIC FUNCTIONS
+# ===================================================================================
 
 
 def play_game():
-    # Core game func
+    """
+    Run a single game session.
+
+    Handles the main game loop: range setup, guessing, attempt tracking,
+    and providing feedback. The game continues until the player guesses
+    the secret number.
+    """
+
     start_user_step, end_user_step, secret_number = get_range()
     attempts = 0
 
@@ -89,6 +139,7 @@ def play_game():
         user_guess = get_number("📝 Your guess: ")
         is_correct, message = check_guess(user_guess, secret_number, start_user_step, end_user_step)
 
+        # Handle out-of-range guesses without counting attempts
         if message == f"🤯 Number must be from {start_user_step} to {end_user_step}!":
             print(message)
             continue
@@ -106,19 +157,30 @@ def play_game():
 
 
 def play_again():
-    # Restart game func
+    """
+    Ask the player if they want to play again.
+    """
     user_answer = input("🎮 Do you want to play again? (y/n): ").lower()
     return user_answer in ['yes', 'y', 'да', 'д']
 
 
-# --- 3. MAIN FUNC ---
+# ===============================================================================================
+# 3. MAIN FUNC
+# ===============================================================================================
 
 
 def main():
-    # Main func
+    """
+    Main game controller.
+
+    Greets the player and runs the game loop. After each game,
+    asks if the player wants to play again.
+    """
     greet()
+
     while True:
         play_game()
+
         if not play_again():
             print(f"Thank you for playing. Goodbye! 👋")
             break

@@ -170,26 +170,25 @@ pytest tests/test_game.py -v
 
 ```
 ============================= test session starts =============================
-collecting ... collected 16 items
+collecting ... collected 15 items
 
-tests/test_game.py::test_check_guess_correct PASSED                      [  6%]
-tests/test_game.py::test_check_guess_out_of_range PASSED                 [ 12%]
-tests/test_game.py::test_check_guess_lower PASSED                        [ 18%]
-tests/test_game.py::test_check_guess_higher PASSED                       [ 25%]
-tests/test_game.py::test_temperature_very_hot PASSED                     [ 31%]
-tests/test_game.py::test_temperature_hot PASSED                          [ 37%]
-tests/test_game.py::test_temperature_warm PASSED                         [ 43%]
-tests/test_game.py::test_temperature_cool PASSED                         [ 50%]
-tests/test_game.py::test_temperature_cold PASSED                         [ 56%]
-tests/test_game.py::test_temperature_boundary_very_hot PASSED            [ 62%]
-tests/test_game.py::test_temperature_boundary_hot PASSED                 [ 68%]
-tests/test_game.py::test_temperature_boundary_warm PASSED                [ 75%]
-tests/test_game.py::test_temperature_boundary_cool PASSED                [ 81%]
-tests/test_game.py::test_temperature_boundary_cold PASSED                [ 87%]
-tests/test_game.py::test_temperature_with_different_range PASSED         [ 93%]
-tests/test_game.py::test_temperature_zero_range PASSED                   [100%]
+tests/test_game.py::test_check_guess_correct 
+tests/test_game.py::test_check_guess_lower 
+tests/test_game.py::test_check_guess_out_of_range 
+tests/test_game.py::test_temperature_very_hot 
+tests/test_game.py::test_temperature_hot 
+tests/test_game.py::test_temperature_warm 
+tests/test_game.py::test_temperature_cold 
+tests/test_game.py::test_get_number_valid 
+tests/test_game.py::test_get_number_invalid_then_valid 
+tests/test_game.py::test_get_range_valid 
+tests/test_game.py::test_get_range_invalid_then_valid 
+tests/test_game.py::test_play_again_yes 
+tests/test_game.py::test_play_again_no 
+tests/test_game.py::test_greet_output 
+tests/test_game.py::test_temperature_boundary 
 
-============================= 16 passed in 0.03s ==============================
+============================= 15 passed in 4.04s ==============================
 ```
 
 ---
