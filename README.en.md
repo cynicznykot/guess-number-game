@@ -219,4 +219,4 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 ## Support the Project
 
-If you like this my simple project, give it a ⭐ on GitHub! I would be very grateful
+If you like this my simple project, give it a ⭐ on GitHub! I would be very grateful!
