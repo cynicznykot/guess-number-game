@@ -57,7 +57,6 @@ class GuessNumberGame:
         max_attempts (Optional[int]): The maximum number of attempts allowed.
     """
 
-
     def __init__(self, min_number: int, max_number: int, max_attempts: Optional[int] = None) -> None:
         """
         Initialize the game with specified parameters.
@@ -83,7 +82,6 @@ class GuessNumberGame:
         # Generate a random secret number within the specified range
         self.secret_number = random.randint(min_number, max_number)
         self.attempts = 0
-
 
     def guess(self, number: int) -> str:
         """
@@ -115,13 +113,23 @@ class GuessNumberGame:
         else:
             return f"📉 The number is LOWER! Try again!"
 
-
-    def get_temperature(secret_number, user_guess, start_user_step, end_user_step):
+    def get_temperature(self, user_guess: int) -> str:
         """
         Calculate how close the guess is to the secret number.
+
+        Args:
+            user_guess (int): The number guessed by the player.
+
+        Returns:
+            str: A temperature-based feedback message.
         """
-        distance = abs(user_guess - secret_number)
-        max_distance = end_user_step - start_user_step
+
+        distance = abs(user_guess - self.secret_number)
+        max_distance = self.max_number - self.min_number
+
+        # Avoid division by zero if range is 0
+        if max_distance == 0:
+            return "🔥 You're right on target!"
 
         percent = (distance / max_distance) * 100
 
@@ -135,6 +143,39 @@ class GuessNumberGame:
             return "🌥️ Cool. You're getting there."
         else:
             return f"❄️ Cold. You're far away."
+
+    def is_game_over(self) -> bool:
+        """
+        Check if the game has finished.
+
+        Returns:
+            bool: True if the game is over, False otherwise.
+        """
+
+        if self.max_attempts:
+            return self.attempts >= self.max_attempts
+        return False
+
+    def reset(self) -> None:
+        """Reset the game with a new random secret number."""
+        self.secret_number = random.randint(self.min_number, self.max_number)
+        self.attempts = 0
+
+    def get_stats(self) -> dict:
+        """
+        Retrieve current game statistics.
+
+        Returns:
+            dict: Dictionary containing game statistics.
+        """
+        return {
+            'attempts': self.attempts,
+            'max_attempts': self.max_attempts,
+            'range': f"{self.min_number} to {self.max_number}",
+            'is_finished': self.is_game_over(),
+        }
+
+
 
 
     def get_range():
