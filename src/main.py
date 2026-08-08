@@ -1,6 +1,8 @@
-"""Entry point for the game."""
+"""
+Entry point for the "Guess the Number" game.
+"""
 
-from src.game import main
+from .game import main
 
 if __name__ == "__main__":
     main()

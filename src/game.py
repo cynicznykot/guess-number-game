@@ -9,14 +9,56 @@ within a user-defined range. The game provides hints and temperature feedback.
 import random
 import time
 import sys
+from typing import Optional
 
 
 # ======================================================================================
 # 1. AUXILIARY FUNCTIONS
 # ======================================================================================
 
+class GuessNumberGame:
+    """
+    A class representing the "Guess the Number" game.
 
-def greet():
+    The player must guess a random number within a specified range.
+    After each attempt, the game provides a hint whether the guessed
+    number is higher of lower than the secret number.
+
+    Attributes:
+        min_number (int): Minimum number in the range (inclusive).
+        max_number (int): Maximum number in the range (inclusive).
+        secret_number (int): The number randomly chosen by the computer.
+        attempts (int): The number of attempts made by the player.
+        max_attempts (Optional[int]): The maximum number of attempts allowed.
+    """
+
+    def __init__(self, min_number: int, max_number: int, max_attempts: Optional[int] = None) -> None:
+        """
+        Initialize the game with specified parameters.
+
+        Args:
+            min_number (int): Lower bound of the number range (inclusive).
+            max_number (int): Upper bound of the number range (inclusive).
+            max_attempts (Optional[int]): Maximum allowed attempts (None for unlimited).
+
+        Raises:
+            ValueError: If min_number >= max_number or range is too small.
+        """
+
+        # Validate the number range
+        if min_number >= max_number:
+            raise ValueError("The minimum number must be less than the maximum number.")
+        if max_number - min_number < 1:
+            raise ValueError("Range must contain at least one number.")
+
+        self.min_number = min_number
+        self.max_number = max_number
+        self.max_attempts = max_attempts
+        # Generate a random secret number within the specified range
+        self.secret_number = random.randint(min_number, max_number)
+        self.attempts = 0
+
+    def greet():
     """
     Display welcome message and game rules.
 
