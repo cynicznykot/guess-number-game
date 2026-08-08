@@ -1,62 +1,64 @@
-# 🎯 Угадай число
-
-Простая консольная игра на Python, где вы угадываете случайное число.
+# 🎯 Угадай Число
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/Tests-pytest-brightgreen.svg)](tests/)
+[![Tests](https://img.shields.io/badge/Tests-passing-brightgreen.svg)](tests/)
+[![Code Style](https://img.shields.io/badge/Code%20Style-PEP%208-blueviolet.svg)](https://peps.python.org/pep-0008/)
+[![Flake8](https://img.shields.io/badge/Flake8-passing-success.svg)](.flake8)
+
+Консольная игра на Python, в которой игрок пытается угадать случайно 
+сгенерированное число в заданном диапазоне. Игра даёт подсказки 
+и температурную обратную связь (горячо/холодно), чтобы помочь игроку.
 
 ---
 
-## 📖 Оглавление
+## 📖 Содержание
 
-- [О проекте](#о-проекте)
-- [Как играть](#как-играть)
-- [Быстрый старт](#быстрый-старт)
-- [Структура проекта](#структура-проекта)
-- [Запуск тестов](#запуск-тестов)
-- [Технологии](#технологии)
-- [Лицензия](#лицензия)
-- [Автор](#автор)
-
+- [Об игре](#-об-игре)
+- [Как играть](#-как-играть)
+- [Установка](#-установка)
+- [Использование](#-использование)
+- [Пример игрового процесса](#-пример-игрового-процесса)
+- [Структура проекта](#-структура-проекта)
+- [Тестирование](#-тестирование)
+- [Требования](#-требования)
+- [Разработка](#-разработка)
+- [Вклад в проект](#-вклад-в-проект)
+- [Лицензия](#-лицензия)
+- [Автор](#-автор)
+- [Благодарности](#-благодарности)
+- [Поддержка проекта](#-поддержка-проекта)
 ---
 
-## О проекте
+## ✨ Об игре
 
-**"Угадай число"** — это классическая игра для тренировки логики и интуиции.
+**"Угадай Число"** — это классическая игра для тренировки логики и интуиции.
 
 Компьютер загадывает случайное число в выбранном вами диапазоне, а вы пытаетесь его угадать. Игра даёт подсказки:
 
-- 📈 **Выше** / 📉 **Ниже** — направление поиска
+- 📈 **Больше** / 📉 **Меньше** — направление поиска
 - 🔥 **Горячо** / ❄️ **Холодно** — насколько вы близки
 
-### Особенности
-
-- Настраиваемый диапазон чисел
-- Интеллектуальные подсказки
-- Подсчёт попыток
-- Возможность играть снова
-- Чистый и читаемый код
-
 ---
 
-## Как играть
+## 🎯 Как играть
 
-1. Запустите игру
-2. Введите начальное и конечное число диапазона
-3. Вводите свои варианты чисел
+1. 🚀 Запустите игру
+2. 📝 Введите начальное и конечное числа для диапазона
+3. 🤔 Вводите свои предположения
 4. Следуйте подсказкам:
-   - 📈 "Число БОЛЬШЕ" — нужно увеличить
-   - 📉 "Число МЕНЬШЕ" — нужно уменьшить
-   - 🔥 "Горячо" — вы очень близко
-   - ❄️ "Холодно" — вы далеко
-5. Поздравляем! Вы угадали число 🎉
+   - 📈 **"Число БОЛЬШЕ"** — увеличивайте предположение
+   - 📉 **"Число МЕНЬШЕ"** — уменьшайте предположение
+   - 🔥 **"Очень горячо"** — вы в пределах 5% от числа
+   - ☀️ **"Горячо"** — вы в пределах 15% от числа
+   - 🌤️ **"Тепло"** — вы в пределах 30% от числа
+   - 🌥️ **"Прохладно"** — вы в пределах 60% от числа
+   - ❄️ **"Холодно"** — вы далеко (>60%)
+5. 🎉 Поздравляю! Вы угадали число!
 
 ---
 
-## Быстрый старт
-
-### Установка
+## 🚀 Установка
 
 ```bash
 # Клонируйте репозиторий
@@ -76,9 +78,12 @@ source .venv/bin/activate
 
 # Установите зависимости
 pip install -r requirements.txt
+
+# Установите зависимости для разработки (опционально)
+pip install -r requirements-dev.txt
 ```
 
-### Запуск игры
+## 💻 Использование
 
 ```bash
 # Через модуль Python
@@ -88,7 +93,9 @@ python -m src.main
 python src/main.py
 ```
 
-### Пример игры
+## 🎮 Пример игрового процесса
+
+### Игра на английском!
 
 ```
 ==================================================
@@ -124,99 +131,141 @@ Thank you for playing. Goodbye! 👋
 
 ---
 
-## Структура проекта
+## 📁 Структура проекта
 
-```
+```bash
 guess-number-game/
 ├── src/                 # Исходный код
-│   ├── __init__.py      # Пакетный файл
-│   ├── game.py          # Основная логика игры
+│   ├── __init__.py      # Инициализация пакета
+│   ├── game.py          # Логика игры и классы
 │   └── main.py          # Точка входа
 ├── tests/               # Тесты
-│   ├── __init__.py      # Тестовый файл
+│   ├── __init__.py      # Тестовый пакет
 │   └── test_game.py     # Модульные тесты
-├── .flake8              # Flake8 файл конфигурации
-├── .gitignore           # Игнорируемые файлы Git
-├── LICENSE              # Файл лицензии
-├── README.en.md         # Документация (английский)
-├── README.ru.md         # Документация (русскй)
-├── requirements.txt     # Зависимости для запуска
+├── .flake8              # Конфигурация Flake8
+├── .gitignore           # Правила игнорирования Git
+├── LICENSE              # Лицензия MIT
+├── README.en.md         # README на английском
+├── README.ru.md         # README на русском
+├── requirements.txt     # Зависимости для продакшена
 └── requirements-dev.txt # Зависимости для разработки
 ```
 
 ---
 
-## Запуск тестов
+## 🧪 Тестирование
 
-### Установка зависимостей для разработки
-
+### Запуск всех тестов
 ```bash
-pip install -r requirements-dev.txt
+pytest tests/
 ```
 
-### Запуск тестов
-
+### Запуск с покрытием
 ```bash
-# Запустить все тесты
-pytest tests/ -v
-
-# Запустить с покрытием кода
 pytest tests/ --cov=src --cov-report=html
-
-# Запустить конкретный тест
-pytest tests/test_game.py -v
 ```
 
-### Результат тестов
-
+### Запуск конкретного теста
+```bash
+pytest tests/test_game.py::TestGuessNumberGame::test_guess_correct -v
 ```
+
+### Результаты тестов
+
+Все тесты проходят успешно (19/19) ✅
+
+```bash
 ============================= test session starts =============================
-collecting ... collected 15 items
+collecting ... collected 19 items
 
-tests/test_game.py::test_check_guess_correct 
-tests/test_game.py::test_check_guess_lower 
-tests/test_game.py::test_check_guess_out_of_range 
-tests/test_game.py::test_temperature_very_hot 
-tests/test_game.py::test_temperature_hot 
-tests/test_game.py::test_temperature_warm 
-tests/test_game.py::test_temperature_cold 
-tests/test_game.py::test_get_number_valid 
-tests/test_game.py::test_get_number_invalid_then_valid 
-tests/test_game.py::test_get_range_valid 
-tests/test_game.py::test_get_range_invalid_then_valid 
-tests/test_game.py::test_play_again_yes 
-tests/test_game.py::test_play_again_no 
-tests/test_game.py::test_greet_output 
-tests/test_game.py::test_temperature_boundary 
+tests/test_game.py::TestGuessNumberGame::test_game_initialization_default PASSED [  5%]
+tests/test_game.py::TestGuessNumberGame::test_game_initialization_with_max_attempts PASSED [ 10%]
+tests/test_game.py::TestGuessNumberGame::test_game_initialization_invalid_range PASSED [ 15%]
+tests/test_game.py::TestGuessNumberGame::test_guess_correct PASSED       [ 21%]
+tests/test_game.py::TestGuessNumberGame::test_guess_too_low PASSED       [ 26%]
+tests/test_game.py::TestGuessNumberGame::test_guess_too_high PASSED      [ 31%]
+tests/test_game.py::TestGuessNumberGame::test_guess_out_of_range PASSED  [ 36%]
+tests/test_game.py::TestGuessNumberGame::test_max_attempts_limit PASSED  [ 42%]
+tests/test_game.py::TestGuessNumberGame::test_is_game_over PASSED        [ 47%]
+tests/test_game.py::TestGuessNumberGame::test_reset PASSED               [ 52%]
+tests/test_game.py::TestGuessNumberGame::test_get_stats PASSED           [ 57%]
+tests/test_game.py::TestGuessNumberGame::test_temperature_very_hot PASSED [ 63%]
+tests/test_game.py::TestGuessNumberGame::test_temperature_hot PASSED     [ 68%]
+tests/test_game.py::TestGuessNumberGame::test_temperature_warm PASSED    [ 73%]
+tests/test_game.py::TestGuessNumberGame::test_temperature_cool PASSED    [ 78%]
+tests/test_game.py::TestGuessNumberGame::test_temperature_cold PASSED    [ 84%]
+tests/test_game.py::TestHelperFunctions::test_get_number_valid_input PASSED [ 89%]
+tests/test_game.py::TestHelperFunctions::test_get_number_invalid_input_then_valid PASSED [ 94%]❌ Please enter a NUMBER!
 
-============================= 15 passed in 4.04s ==============================
+tests/test_game.py::TestGameController::test_game_controller_initialization PASSED [100%]
+
+============================= 19 passed in 0.02s ==============================
 ```
 
 ---
 
-## Технологии
+## 📦 Требования
 
-- **Python 3.8+** — язык программирования
-- **pytest** — тестирование
-- **Стандартная библиотека** — без внешних зависимостей
+### Продакшен
+- **Python 3.8+**
+- **Нет внешних зависимостей**
+
+### Разработка
+- **pytest >= 7.0.0**
+- **pytest-cov >= 4.0.0**
+- **flake8 >= 6.0.0**
+
+## 🔧 Разработка
+
+### Стиль кода
+Проект следует стандартам PEP8 с некоторыми корректировками:
+
+```bash
+# Проверка стиля кода
+flake8 src/
+
+# Авто-исправление с Black (опционально)
+black src/
+```
+
+### Pre-commit хуки (опционально)
+```bash
+# Установка pre-commit
+pip install pre-commit
+pre-commit install
+```
+
+## 🤝 Вклад в проект
+
+Приветствуются вклады! Вот как вы можете помочь:
+
+1. Форкните репозиторий
+2. Создайте новую ветку (git checkout -b feature/amazing-feature)
+3. Внесите свои изменения
+4. Запустите тесты (pytest tests/)
+5. Зафиксируйте изменения (git commit -m 'Add amazing feature')
+6. Запушьте в ветку (git push origin feature/amazing-feature)
+7. Откройте Pull Request
+
+## 📄 Лицензия
+
+Распространяется под лицензией MIT. Подробности в файле [LICENSE](LICENSE).
 
 ---
 
-## Лицензия
-
-Распространяется под лицензией MIT. См. файл [LICENSE](LICENSE) для подробностей.
-
----
-
-## Автор
+## 👤 Автор
 
 **CynicznyKot**
 
 - GitHub: [@cynicznykot](https://github.com/cynicznykot)
 - Проект: [guess-number-game](https://github.com/cynicznykot/guess-number-game)
 
+
+## 🙏 Благодарности
+- **Вдохновлён классическими играми "Угадай число"**
+- **Создано с Python и любовью ❤️**
 ---
 
-## Поддержите проект
+## ⭐ Поддержка проекта
 
-Если вам понравился мой небольшой проект, поставьте ⭐ на GitHub! Буду очень благодарен! 
+Если вам нравится этот простой проект, поставьте ⭐ на GitHub! Буду очень благодарен!
