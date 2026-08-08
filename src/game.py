@@ -235,97 +235,71 @@ class GameController:
             except ValueError as e:
                 print(f"❌ {e}")
 
-                
-
-    def get_range():
+    def play_round(self) -> None:
         """
-        Get a valid range from the user.
+        Play a single round of the game.
 
-        Prompts for start and end values, validates them and generates
-        a random secret number within the range.
+        Handles the main game loop: guessing, attempt tracking
+        and providing feedback. The game continues until the player
+        guesses the secret number or runs out of attempts.
         """
-        while True:
-            start_user_step = get_number("🖥️ Please enter any number for start step: ")
+        if not self.game:
+            print(f"❌ Game not initialized!")
+            return
 
-            end_user_step = get_number("🖥️ Please enter any number for end step: ")
-
-            # Easter meme egg: 6-7 joke
-            if start_user_step == 6 and end_user_step == 7:
-                print("😄 Six-seven.. Are you kidding? Please let's be serious!")
-                continue
-            if start_user_step < end_user_step:
-                secret_number = random.randint(start_user_step, end_user_step)
-                return start_user_step, end_user_step, secret_number
-
-            print("❌ Start must be less than end!")
-
-
-# ===================================================================================
-# 2. GAME LOGIC FUNCTIONS
-# ===================================================================================
-
-
-    def play_game():
-        """
-        Run a single game session.
-
-        Handles the main game loop: range setup, guessing, attempt tracking,
-        and providing feedback. The game continues until the player guesses
-        the secret number.
-        """
-
-        start_user_step, end_user_step, secret_number = get_range()
-        attempts = 0
-
-        print(f"🤔 I guessed from {start_user_step} to {end_user_step}!")
-
-        while True:
+        while not self.game.is_game_over():
             user_guess = get_number("📝 Your guess: ")
-            is_correct, message = check_guess(user_guess, secret_number, start_user_step, end_user_step)
 
-            # Handle out-of-range guesses without counting attempts
-            if message == f"🤯 Number must be from {start_user_step} to {end_user_step}!":
-                print(message)
-                continue
+            try:
+                result = self.game.guess(user_guess)
 
-            attempts += 1
+                # Check if the player exceeded max attempts
+                if "Maximum attempts exceeded" in result:
+                    print(result)
+                    break
 
-            if is_correct:
-                print(message)
-                print(f"📊 Your Attempts: {attempts}")
-                break
+                print(result)
 
-            temp = get_temperature(secret_number, user_guess, start_user_step, end_user_step)
-            print(message)
-            print(temp)
+                # If the player won, show attempts and break
+                if "🎉🏆⭐ CONGRATULATION! You guessed the number!" in result:
+                    print(f"📊 Your Attempts: {self.game.attempts}")
+                    break
 
+                # Show temperature feedback
+                temp = self.game.get_temperature(user_guess)
+                print(temp)
 
-    def play_again():
+            except ValueError as e:
+                print(f"❌ {e}")
+
+        # Show game over message if the player didn't win
+        if self.game.is_game_over() and not "🎉🏆⭐ CONGRATULATION! You guessed the number!" in result:
+            print(f"Game over! The secret number was {self.game.secret_number}")
+
+    def play_again(self) -> bool:
         """
         Ask the player if they want to play again.
+
+        Returns:
+            bool: True if the player wants to play again, False otherwise.
         """
+
         user_answer = input("🎮 Do you want to play again? (y/n): ").lower()
         return user_answer in ['yes', 'y', 'да', 'д']
 
-
-# ===============================================================================================
-# 3. MAIN FUNC
-# ===============================================================================================
-
-
-    def main():
+    def run(self) -> None:
         """
-        Main game controller.
+        Main game loop.
 
         Greets the player and runs the game loop. After each game,
         asks if the player wants to play again.
         """
-        greet()
+        self.greet()
 
         while True:
-            play_game()
+            self.setup_game()
+            self.play_round()
 
-            if not play_again():
-                print(f"Thank you for playing. Goodbye! 👋")
+            if not self.play_again():
+                print("Thank you for playing. Goodbye! 👋")
                 break
-
