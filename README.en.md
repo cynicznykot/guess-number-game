@@ -1,27 +1,37 @@
 # 🎯 Guess the Number
 
-A simple console-based number guessing game written in Python.
-
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/Tests-pytest-brightgreen.svg)](tests/)
+[![Tests](https://img.shields.io/badge/Tests-passing-brightgreen.svg)](tests/)
+[![Code Style](https://img.shields.io/badge/Code%20Style-PEP%208-blueviolet.svg)](https://peps.python.org/pep-0008/)
+[![Flake8](https://img.shields.io/badge/Flake8-passing-success.svg)](.flake8)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+
+A console-based number guessing game built with Python. The player tries to guess
+a randomly generated number within a user-defined range. The game provides hints 
+and temperature feedback (hot/cold) to guide the player.
 
 ---
 
 ## 📖 Table of Contents
 
-- [About](#about)
-- [How to Play](#how-to-play)
-- [Quick Start](#quick-start)
-- [Project Structure](#project-structure)
-- [Running Tests](#running-tests)
-- [Technologies](#technologies)
-- [License](#license)
-- [Author](#author)
-
+- [About](#-about)
+- [How To Play](#-how-to-play)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Gameplay Example](#-gameplay-example)
+- [Project Structure](#-project-structure)
+- [Testing](#-testing)
+- [Requirements](#-requirements)
+- [Development](#-development)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Author](#-author)
+- [Acknowledgments](#-acknowledgments)
+- [Support the Project](#-support-the-project)
 ---
 
-## About
+## ✨ About
 
 **"Guess the Number"** is a classic game for training logic and intuition.
 
@@ -30,33 +40,28 @@ The computer picks a random number within your chosen range, and you try to gues
 - 📈 **Higher** / 📉 **Lower** — search direction
 - 🔥 **Hot** / ❄️ **Cold** — how close you are
 
-### Features
-
-- Customizable number range
-- Intelligent hints
-- Attempt counter
-- Replayability
-- Clean and readable code
-
 ---
 
-## How to Play
+## 🎯 How to Play
 
-1. Launch the game
-2. Enter the start and end numbers for the range
-3. Enter your guesses
+## 🎯 How to Play
+
+1. 🚀 Launch the game
+2. 📝 Enter the start and end numbers for the range
+3. 🤔 Enter your guesses
 4. Follow the hints:
-   - 📈 "Number is HIGHER" — increase your guess
-   - 📉 "Number is LOWER" — decrease your guess
-   - 🔥 "Hot" — you're very close
-   - ❄️ "Cold" — you're far away
-5. Congratulations! You guessed the number 🎉
+   - 📈 **"Number is HIGHER"** — increase your guess
+   - 📉 **"Number is LOWER"** — decrease your guess  
+   - 🔥 **"Very hot"** — you're within 5% of the number
+   - ☀️ **"Hot"** — you're within 15% of the number
+   - 🌤️ **"Warm"** — you're within 30% of the number
+   - 🌥️ **"Cool"** — you're within 60% of the number
+   - ❄️ **"Cold"** — you're far away (>60%)
+5. 🎉 Congratulations! You guessed the number!
 
 ---
 
-## Quick Start
-
-### Installation
+## 🚀 Installation
 
 ```bash
 # Clone the repository
@@ -76,9 +81,12 @@ source .venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
+
+# Install development dependencies (optional)
+pip install -r requirements-dev.txt
 ```
 
-### Running the Game
+## 💻 Usage
 
 ```bash
 # Through Python module
@@ -88,7 +96,7 @@ python -m src.main
 python src/main.py
 ```
 
-### Game Example
+## 🎮 Gameplay Example
 
 ```
 ==================================================
@@ -124,98 +132,144 @@ Thank you for playing. Goodbye! 👋
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 guess-number-game/
-├── src/                    # Source code
-│   ├── __init__.py        # Package file
-│   ├── game.py            # Core game logic
-│   └── main.py            # Entry point
-├── tests/                  # Tests
-│   ├── __init__.py
-│   └── test_game.py       # Unit tests
-├── .gitignore             # Git ignore file
-├── LICENSE                # MIT License
-├── README.md              # Documentation (Russian)
-├── README.en.md           # Documentation (English)
-├── requirements.txt       # Production dependencies
-└── requirements-dev.txt   # Development dependencies
+├── src/                 # Source code
+│   ├── __init__.py      # Package initialization
+│   ├── game.py          # Game logic and classes
+│   └── main.py          # Entry point
+├── tests/               # Tests
+│   ├── __init__.py      # Test package
+│   └── test_game.py     # Unit tests
+├── .flake8              # Flake8 configuration
+├── .gitignore           # Git ignore rules
+├── LICENSE              # LICENSE MIT
+├── README.en.md         # English README
+├── README.ru.md         # Russian README
+├── requirements.txt     # Production dependencies
+└── requirements-dev.txt # Development dependencies
 ```
 
 ---
 
-## Running Tests
+## 🧪 Testing
 
-### Install Development Dependencies
-
+### Run all tests
 ```bash
-pip install -r requirements-dev.txt
+pytest tests/
 ```
 
-### Run Tests
-
+### Run with coverage
 ```bash
-# Run all tests
-pytest tests/ -v
-
-# Run with code coverage
 pytest tests/ --cov=src --cov-report=html
+```
 
-# Run specific test
-pytest tests/test_game.py -v
+### Run specific test
+```bash
+pytest tests/test_game.py::TestGuessNumberGame::test_guess_correct -v
 ```
 
 ### Test Results
 
-```
+All tests are passing (19/19) ✅
+
+```bash
 ============================= test session starts =============================
-collecting ... collected 15 items
+collecting ... collected 19 items
 
-tests/test_game.py::test_check_guess_correct 
-tests/test_game.py::test_check_guess_lower 
-tests/test_game.py::test_check_guess_out_of_range 
-tests/test_game.py::test_temperature_very_hot 
-tests/test_game.py::test_temperature_hot 
-tests/test_game.py::test_temperature_warm 
-tests/test_game.py::test_temperature_cold 
-tests/test_game.py::test_get_number_valid 
-tests/test_game.py::test_get_number_invalid_then_valid 
-tests/test_game.py::test_get_range_valid 
-tests/test_game.py::test_get_range_invalid_then_valid 
-tests/test_game.py::test_play_again_yes 
-tests/test_game.py::test_play_again_no 
-tests/test_game.py::test_greet_output 
-tests/test_game.py::test_temperature_boundary 
+tests/test_game.py::TestGuessNumberGame::test_game_initialization_default PASSED [  5%]
+tests/test_game.py::TestGuessNumberGame::test_game_initialization_with_max_attempts PASSED [ 10%]
+tests/test_game.py::TestGuessNumberGame::test_game_initialization_invalid_range PASSED [ 15%]
+tests/test_game.py::TestGuessNumberGame::test_guess_correct PASSED       [ 21%]
+tests/test_game.py::TestGuessNumberGame::test_guess_too_low PASSED       [ 26%]
+tests/test_game.py::TestGuessNumberGame::test_guess_too_high PASSED      [ 31%]
+tests/test_game.py::TestGuessNumberGame::test_guess_out_of_range PASSED  [ 36%]
+tests/test_game.py::TestGuessNumberGame::test_max_attempts_limit PASSED  [ 42%]
+tests/test_game.py::TestGuessNumberGame::test_is_game_over PASSED        [ 47%]
+tests/test_game.py::TestGuessNumberGame::test_reset PASSED               [ 52%]
+tests/test_game.py::TestGuessNumberGame::test_get_stats PASSED           [ 57%]
+tests/test_game.py::TestGuessNumberGame::test_temperature_very_hot PASSED [ 63%]
+tests/test_game.py::TestGuessNumberGame::test_temperature_hot PASSED     [ 68%]
+tests/test_game.py::TestGuessNumberGame::test_temperature_warm PASSED    [ 73%]
+tests/test_game.py::TestGuessNumberGame::test_temperature_cool PASSED    [ 78%]
+tests/test_game.py::TestGuessNumberGame::test_temperature_cold PASSED    [ 84%]
+tests/test_game.py::TestHelperFunctions::test_get_number_valid_input PASSED [ 89%]
+tests/test_game.py::TestHelperFunctions::test_get_number_invalid_input_then_valid PASSED [ 94%]❌ Please enter a NUMBER!
 
-============================= 15 passed in 4.04s ==============================
+tests/test_game.py::TestGameController::test_game_controller_initialization PASSED [100%]
+
+============================= 19 passed in 0.02s ==============================
 ```
 
 ---
 
-## Technologies
+## 📦 Requirements
 
-- **Python 3.8+** — programming language
-- **pytest** — testing framework
-- **Standard library** — no external dependencies
+### Production
+- **Python 3.8+**
 
----
+- **No external dependencies**
 
-## License
+### Development
+- **pytest >= 7.0.0**
+
+- **pytest-cov >= 4.0.0**
+
+- **flake8 >= 6.0.0**
+
+## 🔧 Development
+
+### Code style
+This project follows PEP 8 standards with some adjustments:
+
+```bash
+# Check code style
+flake8 src/
+
+# Auto-fix with Black (optional)
+black src/
+```
+
+### Pre-commit hooks(optional)
+```bash
+# Install pre-commit
+pip install pre-commit
+pre-commit install
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how:
+
+1. Fork the repository
+2. Create a new branch (git checkout -b feature/amazing-feature)
+3. Make your changes
+4. Run tests (pytest tests/)
+5. Commit your changes (git commit -m 'Add amazing feature')
+6. Push to the branch (git push origin feature/amazing-feature)
+7. Open a Pull Request
+
+## 📄 License
 
 Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 ---
 
-## Author
+## 👤 Author
 
 **CynicznyKot**
 
 - GitHub: [@cynicznykot](https://github.com/cynicznykot)
 - Project: [guess-number-game](https://github.com/cynicznykot/guess-number-game)
 
+
+## 🙏 Acknowledgments
+- **Inspired by classic number guessing games**
+- **Built with Python and love ❤️**
 ---
 
-## Support the Project
+## ⭐ Support the Project
 
 If you like this my simple project, give it a ⭐ on GitHub! I would be very grateful!

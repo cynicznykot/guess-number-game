@@ -128,19 +128,20 @@ Thank you for playing. Goodbye! 👋
 
 ```
 guess-number-game/
-├── src/                    # Исходный код
-│   ├── __init__.py        # Пакетный файл
-│   ├── game.py            # Основная логика игры
-│   └── main.py            # Точка входа
-├── tests/                  # Тесты
-│   ├── __init__.py
-│   └── test_game.py       # Модульные тесты
-├── .gitignore             # Игнорируемые файлы Git
-├── LICENSE                # Лицензия MIT
-├── README.md              # Документация (русский)
-├── README.en.md           # Документация (английский)
-├── requirements.txt       # Зависимости для запуска
-└── requirements-dev.txt   # Зависимости для разработки
+├── src/                 # Исходный код
+│   ├── __init__.py      # Пакетный файл
+│   ├── game.py          # Основная логика игры
+│   └── main.py          # Точка входа
+├── tests/               # Тесты
+│   ├── __init__.py      # Тестовый файл
+│   └── test_game.py     # Модульные тесты
+├── .flake8              # Flake8 файл конфигурации
+├── .gitignore           # Игнорируемые файлы Git
+├── LICENSE              # Файл лицензии
+├── README.en.md         # Документация (английский)
+├── README.ru.md         # Документация (русскй)
+├── requirements.txt     # Зависимости для запуска
+└── requirements-dev.txt # Зависимости для разработки
 ```
 
 ---
