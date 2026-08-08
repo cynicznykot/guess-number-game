@@ -134,7 +134,7 @@ Thank you for playing. Goodbye! 👋
 
 ## 📁 Project Structure
 
-```
+```bash
 guess-number-game/
 ├── src/                 # Source code
 │   ├── __init__.py      # Package initialization
@@ -209,14 +209,11 @@ tests/test_game.py::TestGameController::test_game_controller_initialization PASS
 
 ### Production
 - **Python 3.8+**
-
 - **No external dependencies**
 
 ### Development
 - **pytest >= 7.0.0**
-
 - **pytest-cov >= 4.0.0**
-
 - **flake8 >= 6.0.0**
 
 ## 🔧 Development
