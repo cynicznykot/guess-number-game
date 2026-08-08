@@ -1,213 +1,259 @@
 """
-Unit tests fo the "Guess the Number" game.
-
-Tests cover all core game functions including input validation,
-guess checking, temperature calculation and game flow control.
+Unit tests for the 'Guess the Number' game.
 """
 
-
 import pytest
-from unittest.mock import patch
-from src.game import (
-    check_guess,
-    get_temperature,
-    get_number,
-    get_range,
-    play_again,
-    greet
-)
+from src.game import GuessNumberGame, get_number
 
 
-# =================================================================================================
-# 1. CHECK GUESS TESTS
-# =================================================================================================
+# ======================================================================================
+# TESTS FOR GuessNumberGame CLASS
+# ======================================================================================
 
 
-def test_check_guess_correct():
-    """
-    Test correct guess detection.
+class TestGuessNumberGame:
+    """Test suite for the GuessNumberGame class."""
 
-    When the player guesses the exact secret number, the function should
-    return True and include a congratulatory message.
-    """
-    is_correct, message = check_guess(user_guess=50, secret_number=50, start_user_step=1, end_user_step=100)
-    assert is_correct is True
-    assert "CONGRATULATION" in message
+    def test_game_initialization_default(self):
+        """Test that the game initializes correctly with default parameters."""
+
+        game = GuessNumberGame(1, 10)
+        assert game.min_number == 1
+        assert game.max_number == 10
+        assert 1 <= game.secret_number <= 10
+        assert game.attempts == 0
+        assert game.max_attempts is None
+
+    def test_game_initialization_with_max_attempts(self):
+        """Test that the game initializes correctly with max_attempts."""
+
+        game = GuessNumberGame(1, 10, max_attempts=5)
+        assert game.min_number == 1
+        assert game.max_number == 10
+        assert game.max_attempts == 5
+        assert game.attempts == 0
+
+    def test_game_initialization_invalid_range(self):
+        """Test that the game raises ValueError for invalid ranges."""
+
+        # Minimum number greater than maximum
+        with pytest.raises(ValueError, match="The minimum number must be less than"):
+            GuessNumberGame(10, 1)
+
+        # Equal numbers (empty range)
+        with pytest.raises(ValueError, match="The minimum number must be less than"):
+            GuessNumberGame(5, 5)
+
+    def test_guess_correct(self, monkeypatch):
+        """Test that the game correctly identifies a correct guess."""
+
+        # Mock random.randint to always return 5
+        import random
+        monkeypatch.setattr(random, 'randint', lambda a, b: 5)
+
+        game = GuessNumberGame(1, 10)
+        result = game.guess(5)
+        assert "🎉🏆⭐ CONGRATULATION!" in result
+        assert game.attempts == 1
+
+    def test_guess_too_low(self):
+        """Test that the game correctly identifies a low guess."""
+
+        game = GuessNumberGame(1, 10)
+        # Since secret number is random, we need to guess a number we know is lower
+        # We'll use a spy or mock approach, or just test the logic
+        # For deterministic testing, we can patch random.randint
+        import random
+        original_randint = random.randint
+        random.randint = lambda a, b: 5  # Force secret number to be 5
+
+        game = GuessNumberGame(1, 10)
+        result = game.guess(3)
+        assert "📈 The number is HIGHER!" in result
+        assert game.attempts == 1
+
+        # Restore original randint
+        random.randint = original_randint
+
+    def test_guess_too_high(self):
+        """Test that the game correctly identifies a high guess."""
+
+        import random
+        original_randint = random.randint
+        random.randint = lambda a, b: 5  # Force secret number to be 5
+
+        game = GuessNumberGame(1, 10)
+        result = game.guess(7)
+        assert "📉 The number is LOWER!" in result
+        assert game.attempts == 1
+
+        random.randint = original_randint
+
+    def test_guess_out_of_range(self):
+        """Test that the game rejects guesses outside the valid range."""
+
+        game = GuessNumberGame(1, 10)
+        with pytest.raises(ValueError, match="The number must be between"):
+            game.guess(15)
+        with pytest.raises(ValueError, match="The number must be between"):
+            game.guess(0)
+        assert game.attempts == 0  # Attempts should not increment for invalid guesses
+
+    def test_max_attempts_limit(self):
+        """Test that the game correctly enforces the maximum attempts limit."""
+
+        import random
+        original_randint = random.randint
+        random.randint = lambda a, b: 10  # Force secret number to be 10
+
+        game = GuessNumberGame(1, 10, max_attempts=3)
+        # Make 3 incorrect guesses
+        result = game.guess(1)  # Guess 1 (too low)
+        result = game.guess(2)  # Guess 2 (too low)
+        result = game.guess(3)  # Guess 3 (too low)
+
+        # The next guess should trigger the attempts limit message
+        result = game.guess(4)
+        assert "Maximum attempts exceeded" in result
+        assert game.attempts == 4
+
+        random.randint = original_randint
+
+    def test_is_game_over(self):
+        """Test that is_game_over correctly identifies game state."""
+
+        # Without max_attempts, game should never be over
+        game = GuessNumberGame(1, 10)
+        assert not game.is_game_over()
+        game.guess(5)
+        assert not game.is_game_over()
+
+        # With max_attempts
+        import random
+        original_randint = random.randint
+        random.randint = lambda a, b: 10
+
+        game = GuessNumberGame(1, 10, max_attempts=2)
+        assert not game.is_game_over()
+        game.guess(1)  # Incorrect guess
+        assert not game.is_game_over()
+        game.guess(2)  # Second incorrect guess - should trigger game over
+        assert game.is_game_over()
+
+        random.randint = original_randint
+
+    def test_reset(self):
+        """Test that the game resets correctly with a new secret number."""
+
+        game = GuessNumberGame(1, 10)
+        old_secret = game.secret_number
+        game.attempts = 5
+
+        game.reset()
+
+        assert game.attempts == 0
+        # Secret number might be the same by chance, but we check it's within range
+        assert 1 <= game.secret_number <= 10
+
+    def test_get_stats(self):
+        """Test that the game returns correct statistics."""
+
+        import random
+        original_randint = random.randint
+        random.randint = lambda a, b: 5
+
+        game = GuessNumberGame(1, 10, max_attempts=5)
+        game.guess(3)
+        game.guess(4)
+
+        stats = game.get_stats()
+        assert stats['attempts'] == 2
+        assert stats['max_attempts'] == 5
+        assert stats['range'] == "1 to 10"
+        assert not stats['is_finished']
+
+        random.randint = original_randint
+
+    def test_temperature_very_hot(self):
+        """Test temperature feedback when guess is very close (<=5%)."""
+
+        game = GuessNumberGame(1, 100)
+        game.secret_number = 50  # Force secret number
+
+        temp = game.get_temperature(49)  # Distance = 1, max_distance = 99, percent ≈ 1%
+        assert "🔥 Very hot!" in temp
+
+    def test_temperature_hot(self):
+        """Test temperature feedback when guess is close (<=15%)."""
+
+        game = GuessNumberGame(1, 100)
+        game.secret_number = 50
+
+        temp = game.get_temperature(43)  # Distance = 7, max_distance = 99, percent ≈ 7%
+        assert "☀️ Hot!" in temp
+
+    def test_temperature_warm(self):
+        """Test temperature feedback when guess is moderately close (<=30%)."""
+
+        game = GuessNumberGame(1, 100)
+        game.secret_number = 50
+
+        temp = game.get_temperature(35)  # Distance = 15, max_distance = 99, percent ≈ 15%
+        assert "🌤️ Warm." in temp
+
+    def test_temperature_cool(self):
+        """Test temperature feedback when guess is far (<=60%)."""
+
+        game = GuessNumberGame(1, 100)
+        game.secret_number = 50
+
+        temp = game.get_temperature(20)  # Distance = 30, max_distance = 99, percent ≈ 30%
+        assert "🌥️ Cool." in temp
+
+    def test_temperature_cold(self):
+        """Test temperature feedback when guess is very far (>60%)."""
+        
+        game = GuessNumberGame(1, 100)
+        game.secret_number = 95
+
+        temp = game.get_temperature(1)  # distance = 94, max_distance = 99, percent ≈ 95%
+        assert "❄️ Cold." in temp
 
 
-def test_check_guess_lower():
-    """
-    Test guess that is lower than the secret number.
-
-    The function should return False and include the number is higher.
-    """
-    is_correct, message = check_guess(user_guess=30, secret_number=50, start_user_step=1, end_user_step=100)
-    assert is_correct is False
-    assert "HIGHER" in message
+# ======================================================================================
+# TESTS FOR HELPER FUNCTIONS
+# ======================================================================================
 
 
-def test_check_guess_out_of_range():
-    """
-    Test guess that is outside the valid number range.
+class TestHelperFunctions:
+    """Test suite for helper functions."""
 
-    The function should reject guesses below the minimum or above the maximum.
-    """
-    is_correct, message = check_guess(user_guess=150, secret_number=50, start_user_step=1, end_user_step=100)
-    assert is_correct is False
-    assert "must be from" in message
+    def test_get_number_valid_input(self, monkeypatch):
+        """Test that get_number returns valid integer input."""
+        monkeypatch.setattr('builtins.input', lambda _: "42")
+        result = get_number("Enter a number: ")
+        assert result == 42
 
+    def test_get_number_invalid_input_then_valid(self, monkeypatch):
+        """Test that get_number handles invalid input and retries."""
 
-# ==================================================================================================
-# 2. TEMPERATURE TESTS
-# ==================================================================================================
+        inputs = iter(["abc", "42"])
+        monkeypatch.setattr('builtins.input', lambda _: next(inputs))
 
-
-def test_temperature_very_hot():
-    """
-    Test "Very hot" temperature level (≤ 5% of range).
-
-    When the guess is extremely cose to the secret number,
-    the feedback should indicate "Very hot".
-    """
-    temp = get_temperature(50, 48, 1, 100)
-    assert "Very hot" in temp
-
-
-def test_temperature_hot():
-    """
-    Test "Hot" temperature level (5-15% of range).
-
-    When the guess is close to the secret number,
-    the feedback should indicate "Hot".
-    """
-    temp = get_temperature(secret_number=50, user_guess=40, start_user_step=1, end_user_step=100)
-    assert "Hot" in temp
-
-
-def test_temperature_warm():
-    """
-    Test "Warm" temperature level (15-30% of range).
-
-    When the guess is moderately close to the secret number,
-    the feedback should indicate "Warm".
-    """
-    temp = get_temperature(secret_number=50, user_guess=25, start_user_step=1, end_user_step=100)
-    assert "Warm" in temp
-
-
-def test_temperature_cold():
-    """
-    Test "Cold" temperature level (> 60% of range).
-
-    When the guess is far from the secret number,
-    the feedback should indicate "Cold" or "Cool".
-    """
-    temp = get_temperature(secret_number=50, user_guess=1, start_user_step=1, end_user_step=100)
-    assert "Cold" in temp or "Cool" in temp
-
-
-# ==================================================================================================
-# 3. NUMBER INPUT TESTS
-# ==================================================================================================
-
-
-def test_get_number_valid():
-    """Test valid number range input.
-
-    The function should accept a valid range and generate
-    a secret number within that range.
-    """
-    with patch('builtins.input', return_value='42'):
-        result = get_number("Enter: ")
+        result = get_number("Enter a number: ")
         assert result == 42
 
 
-def test_get_number_invalid_then_valid():
-    """Test invalid range followed by valid range.
-
-    When the start is greater than the end, the function should reject
-    the input and prompt again.
-    """
-    with patch('builtins.input', side_effect=['abc', '42']):
-        result = get_number("Enter: ")
-        assert result == 42
+# ======================================================================================
+# TESTS FOR GAMECONTROLLER (Integration tests)
+# ======================================================================================
 
 
-# =================================================================================================
-# 4. RANGE INPUT TESTS
-# =================================================================================================
+class TestGameController:
+    """Test suite for the GameController class."""
 
-
-def test_get_range_valid():
-    """Test valid number range input.
-
-    The finction should accept a valid range and generate
-    a secret number within that range.
-    """
-    with patch('builtins.input', side_effect=['1', '100']):
-        start, end, secret = get_range()
-        assert start == 1
-        assert end == 100
-        assert 1 <= secret <= 100
-
-
-def test_get_range_invalid_then_valid():
-    """Test invalid range followed by valid range.
-
-    When the start is greater than the end, the function should reject
-    the input and prompt again."""
-    with patch('builtins.input', side_effect=['100', '1', '1', '100']):
-        start, end, secret = get_range()
-        assert start == 1
-        assert end == 100
-
-
-# =================================================================================================
-# 5. PLAY AGAIN TESTS
-# =================================================================================================
-
-
-def test_play_again_yes():
-    """Test positive response to "play again" prompt.
-
-    The function should return True for 'y', 'yes', 'да', 'д'.
-    """
-    with patch('builtins.input', return_value='y'):
-        assert play_again() is True
-
-
-def test_play_again_no():
-    """Test negative response to "play again" prompt.
-
-    The function should return False for 'n' or 'no'."""
-    with patch('builtins.input', return_value='n'):
-        assert play_again() is False
-
-
-# =================================================================================================
-# 6. GREETING TEST
-# =================================================================================================
-
-
-def test_greet_output(capsys):
-    """Test the welcome message output.
-
-    The greet function should display a message containing "Welcome".
-    """
-    greet()
-    captured = capsys.readouterr()
-    assert "Welcome" in captured.out
-
-
-# =================================================================================================
-# 7. ADDITIONAL TESTS
-# =================================================================================================
-
-
-def test_temperature_boundary():
-    """Test the boundary between "Hot" and "Warm" temperature levels.
-
-        At exactly 15% distance, the function could return either
-        "Hot" or "Warm" temperature level."""
-    temp = get_temperature(secret_number=50, user_guess=35, start_user_step=1, end_user_step=100)  # Exactly 15% distance
-    assert "Hot" in temp or "Warm" in temp
+    def test_game_controller_initialization(self):
+        """Test that GameController initializes correctly."""
+        from src.game import GameController
+        controller = GameController()
+        assert controller.game is None
