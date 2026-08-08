@@ -212,7 +212,7 @@ class TestGuessNumberGame:
 
     def test_temperature_cold(self):
         """Test temperature feedback when guess is very far (>60%)."""
-        
+
         game = GuessNumberGame(1, 100)
         game.secret_number = 95
 

@@ -7,7 +7,7 @@ within a user-defined range. The game provides hints and temperature feedback.
 
 import random
 import time
-from typing import Optional, Tuple
+from typing import Optional
 
 
 # ======================================================================================
@@ -109,9 +109,9 @@ class GuessNumberGame:
         if number == self.secret_number:
             return "🎉🏆⭐ CONGRATULATION! You guessed the number!"
         elif number < self.secret_number:
-            return f"📈 The number is HIGHER! Try again!"
+            return "📈 The number is HIGHER! Try again!"
         else:
-            return f"📉 The number is LOWER! Try again!"
+            return "📉 The number is LOWER! Try again!"
 
     def get_temperature(self, user_guess: int) -> str:
         """
@@ -134,15 +134,15 @@ class GuessNumberGame:
         percent = (distance / max_distance) * 100
 
         if percent <= 5:
-            return f"🔥 Very hot! You almost guessed it!"
+            return "🔥 Very hot! You almost guessed it!"
         elif percent <= 15:
-            return f"☀️ Hot! You're close!"
+            return "☀️ Hot! You're close!"
         elif percent <= 30:
-            return f"🌤️ Warm. Keep up the good work!"
+            return "🌤️ Warm. Keep up the good work!"
         elif percent <= 60:
             return "🌥️ Cool. You're getting there."
         else:
-            return f"❄️ Cold. You're far away."
+            return "❄️ Cold. You're far away."
 
     def is_game_over(self) -> bool:
         """
@@ -244,7 +244,7 @@ class GameController:
         guesses the secret number or runs out of attempts.
         """
         if not self.game:
-            print(f"❌ Game not initialized!")
+            print("❌ Game not initialized!")
             return
 
         while not self.game.is_game_over():
@@ -285,7 +285,7 @@ class GameController:
         """
 
         user_answer = input("🎮 Do you want to play again? (y/n): ").lower()
-        return user_answer in ['yes', 'y', 'да', 'д']
+        return user_answer in {'yes', 'y', 'да', 'д'}
 
     def run(self) -> None:
         """
