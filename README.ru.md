@@ -146,6 +146,7 @@ guess-number-game/
 ├── .gitignore           # Правила игнорирования Git
 ├── LICENSE              # Лицензия MIT
 ├── README.en.md         # README на английском
+├── README.md            # Основной README со ссылками
 ├── README.ru.md         # README на русском
 ├── requirements.txt     # Зависимости для продакшена
 └── requirements-dev.txt # Зависимости для разработки
